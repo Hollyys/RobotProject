@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-def gcode_generator(img_dir):
+def generator(img_dir):
     # Read in image
     img = cv2.imread(img_dir, 0)
     img = 255 - img
