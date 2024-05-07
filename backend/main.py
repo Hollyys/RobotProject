@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
 from gcode_generator import generator
 
@@ -9,16 +9,20 @@ app = Flask(__name__)
 def render_file():
     return render_template('upload.html')
 
-# 파일 업로드 처리
-@app.route('/fileUpload', methods = ['GET', 'POST'])
-def upload_file():
-    if request.method == 'POST':
-        f = request.files['file']
-        # 저장할 경로 + 파일명
-        img_dir = '/Users/crossrunway/xsCODE/RobotProject/Back-End/uploads/'+secure_filename(f.filename)
-        f.save(img_dir)
-        g_code = generator(img_dir)
-        return g_code
+@app.route('/upload', methods=['POST'])
+def upload_image():
+    if 'image' not in request.files:
+        return jsonify({'error': 'No image provided'}), 400
+    
+    image_file = request.files['image']
+    # 이미지 처리 로직을 여기에 추가
+    img_dir = '/uploads/'+secure_filename(image_file.filename)
+    image_file.save(img_dir)
+    g_code = generator(img_dir)
+    # 이미지 처리 완료 후 응답
+    print(g_code)
+    print('message: Image uploaded successfully')
+    return jsonify({'message': 'Image uploaded successfully'}), 200
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=9999, debug=True)
+    app.run(debug=True)
