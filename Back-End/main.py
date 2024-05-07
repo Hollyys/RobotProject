@@ -15,7 +15,7 @@ def upload_file():
     if request.method == 'POST':
         f = request.files['file']
         # 저장할 경로 + 파일명
-        img_dir = '/Users/crossrunway/xsCODE/RobotProject/uploads/'+secure_filename(f.filename)
+        img_dir = '/Users/crossrunway/xsCODE/RobotProject/Back-End/uploads/'+secure_filename(f.filename)
         f.save(img_dir)
         g_code = generator(img_dir)
         return g_code
