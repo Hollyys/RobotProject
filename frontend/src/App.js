@@ -1,13 +1,13 @@
-import logo from './logo.svg';
+import image from './knu.png'
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={image} width = '800px' />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          모바일 로봇 프로그래밍 중간과제
         </p>
         <a
           className="App-link"
