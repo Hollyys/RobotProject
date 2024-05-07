@@ -3,5 +3,10 @@
 컴퓨터학부 신성한  
 2017110157  
 
-## How to install cv2:  
+## Back-End
+### How to install cv2:  
 python3 -m pip install opencv-python
+
+## Front-End
+### How to run React app:  
+npm start
