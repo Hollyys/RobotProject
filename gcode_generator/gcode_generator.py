@@ -1,9 +1,9 @@
 import cv2
 
-image = cv2.imread('/Users/crossrunway/Downloads')
+img_dir = '/Users/crossrunway/Downloads'
+img = cv2.imread(img_dir)
 
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 contours, _ = cv2.findContours(gray, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
 g_code = ""
