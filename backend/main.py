@@ -1,10 +1,22 @@
-import os
+import os, time
 from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
 from gcode_generator import generator
 from flask_cors import CORS
+import threading
+
+sema = threading.Semaphore(1)
+
+
+UPLOAD_FOLDER = os.path.dirname(os.path.abspath(__file__)) + '/uploads/'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+
+def allowed_file(filename): # filename을 보고 지원하는 media type인지 판별
+    filename = filename.lower()
+    return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 CORS(app)
 
@@ -15,19 +27,28 @@ def render_file():
 
 @app.route('/upload', methods=['POST'])
 def upload_image():
-    if 'image' not in request.files:
-        print('Error: No image provided')
-        return jsonify({'error': 'No image provided'}), 400
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file part'}), 400
+        
+    file = request.files['file']
+    filename = file.filename
     
-    print('message: Image uploaded successfully')
-    image_file = request.files['image']
-    # 이미지 처리 로직을 여기에 추가
-    # img_dir = os.path.dirname(__file__) + '/uploads/'+secure_filename(image_file.filename)
-    # image_file.save(img_dir)
-    g_code = generator(image_file)
-    # 이미지 처리 완료 후 응답
-    print(g_code)
-    return jsonify({'message': 'Image uploaded successfully'}), 200
+    if filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+        
+    if not allowed_file(filename):
+        return jsonify({'message': 'unsupported media type'}), 415
+    
+    sta = time.time() # 시간 측정
+    sema.acquire() # 세마포어 획득
+
+    file.save(os.path.join(app.config['UPLOAD_FOLDER'] + filename))
+
+    img_dir = UPLOAD_FOLDER + filename
+    g_code = generator(img_dir)
+    sema.release() # 세마포어 릴리즈
+        
+    return jsonify({'message': 'gcode generated successfully', 'path': img_dir}), 200
 
 if __name__ == "__main__":
     app.run('0.0.0.0', debug=True)

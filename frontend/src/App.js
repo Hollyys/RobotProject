@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
 function App() {
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
 
-  const handleImageChange = (event) => {
-    setSelectedImage(URL.createObjectURL(event.target.files[0]));
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
   };
 
-  const handleUpload = () => {
+  const handleSubmit = () => {
     const formData = new FormData();
-    formData.append('image', selectedImage);
+    formData.append('file', selectedFile);
 
     fetch('http://localhost:5000/upload', {
       method: 'POST',
@@ -26,13 +26,8 @@ function App() {
 
   return (
     <div>
-      <input type="file" onChange={handleImageChange} />
-      {selectedImage && (
-        <div>
-          <img src={selectedImage} alt="Uploaded" style={{ width: '300px', marginTop: '20px' }} />
-          <button onClick={handleUpload}>Upload</button>
-        </div>
-      )}
+      <input type="file" onChange={handleFileChange} />
+      <button onClick={handleSubmit}>Upload</button>
     </div>
   );
 }
