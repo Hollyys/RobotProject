@@ -6,6 +6,7 @@
 ## Back-End
 ### How to install cv2:  
 python3 -m pip install opencv-python
+pip install flask_cors
 
 ## Front-End
 ### How to run React app:  

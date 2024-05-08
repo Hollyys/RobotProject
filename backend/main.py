@@ -2,8 +2,11 @@ import os
 from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
 from gcode_generator import generator
+from flask_cors import CORS
 
 app = Flask(__name__)
+
+CORS(app)
 
 # 업로드 HTML 렌더링
 @app.route('/')
