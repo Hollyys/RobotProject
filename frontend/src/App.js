@@ -48,7 +48,9 @@ function App() {
       <input type="file" ref={fileInputRef} onChange={handleFileChange} style={{ marginBottom: '10px' }} />
       {previewURL && <img src={previewURL} alt="Preview" style={{ maxWidth: '100%', maxHeight: '300px', marginTop: '10px' }} />}
       <button onClick={handleSubmit} style={{ marginTop: '10px' , marginBottom: '50px'}}>Upload</button>
-      <p style={{ fontSize: '20px' }}>컴퓨터학부 신성한</p>
+      <p style={{ fontSize: '15px', marginTop: '5px' , marginBottom: '5px'}}>컴퓨터학부 신성한</p>
+      <p style={{ fontSize: '15px', marginTop: '5px' , marginBottom: '5px'}}>2017110157</p>
+      <a href="https://github.com/Hollyys/RobotProject.git" style={{ fontSize: '15px', marginTop: '5px', marginBottom: '50px' }}>git repository</a>
     </div>
   );
 }
