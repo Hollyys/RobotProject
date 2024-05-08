@@ -15,13 +15,13 @@ function App() {
       method: 'POST',
       body: formData,
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Upload success:', data);
-      })
-      .catch(error => {
-        console.error('Error uploading:', error);
-      });
+    .then(response => response.json())
+    .then(data => {
+      console.log('Upload success:', data);
+    })
+    .catch(error => {
+      console.error('Error uploading:', error);
+    });
   };
 
   return (

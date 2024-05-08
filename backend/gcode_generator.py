@@ -1,3 +1,4 @@
+import os
 import cv2
 import numpy as np
 
@@ -126,9 +127,8 @@ def generator(img_dir):
     g_code += "M02\n"
     g_code += "%"
 
-    # print(g_code)
     return g_code
 
 # # Test Code
-# img_dir = '/Users/crossrunway/Downloads/gt3.jpeg'
-# print(gcode_generator(img_dir))
+# img_dir = os.path.dirname(__file__) + '/uploads/911gt3rs.png'
+# print(generator(img_dir))
