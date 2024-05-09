@@ -27,7 +27,7 @@ function App() {
     const formData = new FormData();
     formData.append('file', selectedFile);
 
-    fetch('http://localhost:5000/upload', {
+    fetch('http://localhost:9000/upload', {
       method: 'POST',
       body: formData,
     })
