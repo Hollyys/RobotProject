@@ -1,3 +1,4 @@
 midproject/
 backend/__pycache__/
 .DS_Store
+gcode_generator.cpython-310.pyc
