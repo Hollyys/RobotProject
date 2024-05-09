@@ -9,7 +9,6 @@ sema = threading.Semaphore(1)
 
 
 UPLOAD_FOLDER = os.path.dirname(os.path.abspath(__file__)) + '/uploads/'
-GCODE_FOLDER = os.path.dirname(os.path.abspath(__file__)) + '/gcode/'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 def allowed_file(filename): # filename을 보고 지원하는 media type인지 판별
@@ -18,7 +17,6 @@ def allowed_file(filename): # filename을 보고 지원하는 media type인지 �
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['GCODE_FOLDER'] = GCODE_FOLDER
 
 CORS(app)
 
@@ -47,14 +45,11 @@ def upload_image():
     file.save(os.path.join(app.config['UPLOAD_FOLDER'] + filename))
     img_dir = UPLOAD_FOLDER + filename
     
-    g_code = generator(img_dir)
-    gcode_filepath = os.path.join(app.config['GCODE_FOLDER'])+"gcode.txt"
-    with open(gcode_filepath, 'w') as gcode_file:
-        gcode_file.write(g_code)
-
+    # g_code = generator(img_dir)
+    generator(img_dir)
     print(filename, ": g_code generated.")
+
     sema.release() # 세마포어 릴리즈
-        
     return jsonify({'message': 'gcode generated successfully', 'path': img_dir}), 200
 
 if __name__ == "__main__":
