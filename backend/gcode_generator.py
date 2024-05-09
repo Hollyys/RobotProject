@@ -3,6 +3,12 @@ import os
 
 GCODE_FOLDER = os.path.dirname(os.path.abspath(__file__)) + '/gcode/gcode.txt'
 
+def resize_image(img, size):
+    width, height = img.size
+    if width < size[0] or height < size[1]:
+        img = img.resize(size, Image.ANTIALIAS)
+    return img
+
 def create_path(w, h, visited, pixels, width, heigth, max_len, run, route=None):
     
     if route is None:
@@ -51,6 +57,7 @@ def generator(image_path):
     cmds_written = 0
 
     image = Image.open(image_path)
+    image = resize_image(image, (1900, 1200))
     
     img = image.convert('RGB')
     img = img.filter(ImageFilter.BLUR)
@@ -76,7 +83,7 @@ def generator(image_path):
     
     pixels = small_img.load()
 
-    commands = open(GCODE_FOLDER, "a")
+    commands = open(GCODE_FOLDER, "w")
     commands.truncate(0)
 
     # print(f"{pixels[0,0]}")
