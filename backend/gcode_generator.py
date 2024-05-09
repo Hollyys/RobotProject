@@ -130,5 +130,5 @@ def generator(img_dir):
     return g_code
 
 # # Test Code
-# img_dir = os.path.dirname(__file__) + '/uploads/911gt3rs.png'
+# img_dir = os.path.dirname(__file__) + '/uploads/gt3.jpeg'
 # print(generator(img_dir))
