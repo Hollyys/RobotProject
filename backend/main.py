@@ -46,9 +46,10 @@ def upload_image():
 
     img_dir = UPLOAD_FOLDER + filename
     g_code = generator(img_dir)
+    print(filename, ": g_code generated.")
     sema.release() # 세마포어 릴리즈
         
     return jsonify({'message': 'gcode generated successfully', 'path': img_dir}), 200
 
 if __name__ == "__main__":
-    app.run('0.0.0.0', debug=True)
+    app.run(host="0.0.0.0", port=9000, debug=True)
