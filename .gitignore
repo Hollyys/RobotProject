@@ -1,6 +1,3 @@
 midproject/
-*.jpg
-*.jpeg
-*.png
 backend/__pycache__/
 .DS_Store
