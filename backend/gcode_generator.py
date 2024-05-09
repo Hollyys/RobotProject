@@ -47,9 +47,7 @@ def set_longest(longest_path, path):
     if len(longest_path) < len(path):
         longest_path = path
 
-def generator(image_path):
-
-    gcode = ''
+def generator(image_path, TEST_MODE):
 
     BED_MAX_X = 160 
     BED_MAX_Y = -120
@@ -68,7 +66,8 @@ def generator(image_path):
         255, 255, 255,
     ]
 
-    print(palette)
+    if TEST_MODE:
+        print(f"palette: {palette}")
 
     p_img = Image.new('P', (16, 16))
     p_img.putpalette(palette * 128)
@@ -86,10 +85,13 @@ def generator(image_path):
     commands = open(GCODE_FOLDER, "w")
     commands.truncate(0)
 
-    # print(f"{pixels[0,0]}")
+    if TEST_MODE:
+        print(f"pixels[0,0]: {pixels[0,0]}")
 
     visited = set()
     
+    gcode = ''
+
     for h in range(heigth - 1, 1, -1):
         for w in range(width):
             if pixels[w,h] == 0 and (w,h) not in visited:
@@ -114,5 +116,9 @@ def generator(image_path):
                     if i == 0:
                         commands.write(f"G0 Z0\n")
                         gcode += f"G0 Z0\n"
+
+    if TEST_MODE:
+        print(gcode)
+        print('Generator test finished.\n')
 
     return True
