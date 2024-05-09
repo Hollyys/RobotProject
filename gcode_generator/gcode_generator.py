@@ -1,7 +1,4 @@
 from PIL import Image, ImageFilter
-import os
-
-GCODE_FOLDER = os.path.dirname(os.path.abspath(__file__)) + '/gcode/gcode.txt'
 
 def create_path(w, h, visited, pixels, width, heigth, max_len, run, route=None):
     
@@ -76,10 +73,10 @@ def generator(image_path):
     
     pixels = small_img.load()
 
-    commands = open(GCODE_FOLDER, "a")
+    commands = open("/Users/crossrunway/xsCODE/RobotProject/backend/gcode/gcode.txt", "a")
     commands.truncate(0)
 
-    # print(f"{pixels[0,0]}")
+    print(f"{pixels[0,0]}")
 
     visited = set()
     
@@ -108,4 +105,7 @@ def generator(image_path):
                         commands.write(f"G0 Z0\n")
                         gcode += f"G0 Z0\n"
 
-    return True
+    return gcode
+
+img = '/Users/crossrunway/xsCODE/RobotProject/backend/uploads/gt3.jpeg'
+print(generator(img))

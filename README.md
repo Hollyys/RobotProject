@@ -1,7 +1,13 @@
 # RobotProject  
 # 모바일 로봇 프로그래밍 중간과제 레포지토리  
 컴퓨터학부 신성한  
-2017110157  
+2017110157 
+
+## Robot
+### Converts image to g-code
+https://github.com/KoAhauCaleb/drawing_robot_gcode_generator.git
+### G-Code receive format
+http://192.168.120.36/command?commandText={G-Code}
 
 ## Back-End
 ### How to install Flask on Ububtu:
