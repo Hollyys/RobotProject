@@ -7,7 +7,7 @@
 기존의 Drawing 로봇은 이미지 파일 (JPG, JPEG, PNG 등)을 SVG 파일로 변환하여 G Code를 생성해야하는 불편함이 있습니다.
 하지만 이 시스템은 Python Imaging Library(PIL)을 활용하여 Raw 이미지 데이터를 바로 G Code화 할 수 있습니다.
 ## Initial Screen  
-![Uploading initial screen.png…]()
+<img width="592" alt="initial screen" src="https://github.com/Hollyys/RobotProject/assets/91328924/e7131f78-7bfd-447c-8abc-9e1edc074961">
 
 ## System 명세
 해당 레포지토리는 Back-End, Front-End 디렉토리로 구분되어있습니다. 각각 Flask, React 애플리케이션 코드를 가지고 있습니다.
