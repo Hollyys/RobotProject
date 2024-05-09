@@ -9,6 +9,8 @@ pip install Flask
 pip install flask_cors
 ### How to install cv2:  
 python3 -m pip install opencv-python
+### How to run Backend Server:
+(Project Directory)/RobotProject/backend/main.py
 
 ## Front-End
 ### How to install React on Ububtu:
