@@ -3,3 +3,4 @@ midproject/
 *.jpg
 *.jpeg
 *.png
+backend/__pycache__/
