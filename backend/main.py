@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
 from gcode_generator import generator
 from gcode_sender import sender
+from edge_detect import detect
 from flask_cors import CORS
 import threading
 
@@ -49,7 +50,8 @@ def upload_image():
     file.save(os.path.join(app.config['UPLOAD_FOLDER'] + filename))
     img_dir = UPLOAD_FOLDER + filename
     
-    generator(img_dir, app.config['TEST_MODE'])
+    edge_detected_img = detect(img_dir)
+    generator(edge_detected_img, app.config['TEST_MODE'])
     print(f"{filename}: g_code generated.\n")
     sender(app.config['GCODE_FOLDER'], app.config['TEST_MODE'])
 
