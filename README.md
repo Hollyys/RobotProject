@@ -5,7 +5,10 @@
 
 # About System  
 기존의 Drawing 로봇은 이미지 파일 (JPG, JPEG, PNG 등)을 SVG 파일로 변환하여 G Code를 생성해야하는 불편함이 있습니다.
-하지만 이 시스템은 Python Imaging Library(PIL)을 활용하여 Raw 이미지 데이터를 바로 G Code화 할 수 있습니다.
+하지만 이 시스템은 Open CV, Python Imaging Library(PIL)을 활용하여 Raw 이미지 데이터를 바로 G Code화 할 수 있습니다.
+Front-End를 통해 사용자로부터 전달받은 이미지파일을 Open CV의 Canny Edge Detection을 사용하여 엣지를 검출합니다.
+엣지를 검출한 이미지를 분석하여 Gcode를 생성하고 해당 코드를 로봇에게 전송합니다.  
+
 ## Initial Screen  
 <img width="592" alt="initial screen" src="https://github.com/Hollyys/RobotProject/assets/91328924/e7131f78-7bfd-447c-8abc-9e1edc074961">
 
@@ -38,8 +41,10 @@ http://192.168.120.36/command?commandText={G-Code}
 ### How to install Flask on Ububtu:  
 pip install Flask  
 pip install flask_cors  
+### How to install Open CV:  
+python3 -m pip install opencv-python  
 ### How to install PIL:  
-sudo apt install python3-pil python3-pil.imagetk 
+sudo apt install python3-pil python3-pil.imagetk  
 ### How to run Backend Server:  
 (Project Directory)/RobotProject/backend/main.py  
 
